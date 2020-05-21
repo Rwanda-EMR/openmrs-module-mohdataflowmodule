@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- Beans to add to the current Application context definition -->
+
+<beans>
+
+	<bean id="mohdataflowmoduleUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order">
+			<value>2</value>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="**/mohdataflowpatient.portlet">mohdataflowPortlet</prop>
+				<prop key="module/mohdataflowmodule/mohdataflowdischarge.form">mohDataFlowDischargeController</prop>
+				<prop key="module/mohdataflowmodule/inpatient.form">ipdController</prop>
+				<prop key="module/mohdataflowmodule/outpatient.form">opdController</prop>
+								
+				<prop key="module/mohdataflowmodule/diagnosis.form">diagnosisFormController</prop>
+				<prop key="module/mohdataflowmodule/medicalacts.form">medicalActsFormController</prop>
+				
+				<prop key="module/mohdataflowmodule/emergency.form">emergencyFormController</prop>
+				<prop key="module/mohdataflowmodule/mentalhealth.form">mentalHealthFormController</prop>
+				<prop key="module/mohdataflowmodule/opdgeneralinfo.form">opdGeneralInfoFormController</prop>
+				<prop key="module/mohdataflowmodule/ophtalmology.form">ophtalmologyFormController</prop>
+				<prop key="module/mohdataflowmodule/physiotherapy.form">physiotherapyFormController</prop>
+				<prop key="module/mohdataflowmodule/stomatology.form">stomatologyFormController</prop>
+				<prop key="module/mohdataflowmodule/transferout.form">transferOutFormController</prop>
+				<prop key="module/mohdataflowmodule/forensic.form">forensicFormController</prop>
+				
+				<prop key="module/mohdataflowmodule/internalmedecine.form">internalMedecineFormController</prop>
+				<prop key="module/mohdataflowmodule/ipdgeneralinfo.form">ipdGeneralInfoFormController</prop>
+				<prop key="module/mohdataflowmodule/maternity.form">maternityFormController</prop>
+				<prop key="module/mohdataflowmodule/neonatology.form">neonatologyFormController</prop>
+				<prop key="module/mohdataflowmodule/pediatrics.form">pediatricsFormController</prop>
+				<prop key="module/mohdataflowmodule/surgery.form">surgeryFormController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Controllers -->
+
+	<bean id="mohdataflowPortlet" class="org.openmrs.module.mohdataflowmodule.web.controller.MohDataFlowPortletController" />
+
+	<bean id="mohDataFlowDischargeController" class="org.openmrs.module.mohdataflowmodule.web.controller.MohDataFlowDischargeController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/mohdataflowDischargeForm</value>
+		</property>
+	</bean>
+
+	<bean id="ipdController" class="org.openmrs.module.mohdataflowmodule.web.controller.IPDFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="opdController" class="org.openmrs.module.mohdataflowmodule.web.controller.OPDFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="diagnosisFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.DiagnosisFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/templates/diagnosisForm</value>
+		</property>
+	</bean>
+
+	<bean id="medicalActsFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.MedicalActsFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/templates/medicalActsForm</value>
+		</property>
+	</bean>
+	
+
+	<bean id="emergencyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.EmergencyFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="mentalHealthFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.MentalHealthFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="opdGeneralInfoFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.OpdGeneralInfoFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="ophtalmologyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.OphtalmologyFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="physiotherapyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.PhysiotherapyFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="stomatologyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.StomatologyFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+	
+	<bean id="transferOutFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.TransferOutFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	<bean id="forensicFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.ForensicFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/opdForm</value>
+		</property>
+	</bean>
+
+	
+	<bean id="internalMedecineFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.InternalMedecineFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="ipdGeneralInfoFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.IpdGeneralInfoFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="maternityFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.MaternityFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="neonatologyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.NeonatologyFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="pediatricsFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.PediatricsFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<bean id="surgeryFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.SurgeryFormController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/ipdForm</value>
+		</property>
+	</bean>
+
+	<!-- /Controllers -->
+</beans>

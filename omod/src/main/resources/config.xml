@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
+
+<module configVersion="1.2">
+	
+	<!-- Base Module Properties -->
+	<id>mohdataflowmodule</id>
+	<name>MoH Data Flow Module</name>
+	<version>0.0.4-SNAPSHOT</version>
+	<package>org.openmrs.module.mohdataflowmodule</package>
+	<author>MoH-Rwanda</author>
+	<description>
+			HMIS Data Flow Module. Useful for enhancing the Hospital management systems data flow management.
+	</description>
+
+	<activator>org.openmrs.module.mohdataflowmodule.MohDataFlowActivator</activator>
+	
+	<!-- <updateURL>https://dev.openmrs.org/modules/download/mohdataflowmodule/update.rdf</updateURL> -->
+	<!-- /HMIS Data Flow Module Properties -->
+	
+	<require_version>1.6.2.12911</require_version>
+
+	<require_modules>
+		<require_module version="1.3.5-SNAPSHOT">org.openmrs.module.pharmacymanagement</require_module>
+	</require_modules>
+
+	<extension>
+		<point>org.openmrs.patientDashboardTab</point>
+		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowDashboardTab</class>
+	</extension>
+	<!-- Extensions 
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.mohdataflowmodule.extension.html.AdminList</class>
+	</extension>
+	
+	<extension>
+		<point>org.openmrs.patientDashboardTab</point>
+		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowDashboardTab</class>
+	</extension>
+	
+	<extension>
+		<point>org.openmrs.gutter.tools</point>
+		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowGutterLink</class>
+	</extension>-->
+	
+	<!-- AOP
+	<advice>
+		<point>org.openmrs.api.FormService</point>
+		<class>org.openmrs.module.mohdataflowmodule.advice.DuplicateFormAdvisor</class>
+	</advice>
+	 /AOP -->
+	
+	
+	<!-- Required Privileges -->
+	
+	<privilege>
+		<name>View HMIS Data Flow</name>
+		<description>Allows user to access Data Flow module pages/functions (Especially the Patient history)</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage Discharge patient</name>
+		<description>Allows clinician to access Discharge patient page/functions</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - General information</name>
+		<description>Allows clinician to access General information section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Internal Medecine</name>
+		<description>Allows clinician to access Internal Medecine section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Maternity</name>
+		<description>Allows clinician to access Maternity section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Neonatology</name>
+		<description>Allows clinician to access Neonatology section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Surgery</name>
+		<description>Allows clinician to access Surgery section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Pediatrics</name>
+		<description>Allows clinician to access Pediatrics section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Medical Acts</name>
+		<description>Allows clinician to access Medical Acts section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage IPD Form - Diagnosis</name>
+		<description>Allows clinician to access Diagnosis section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - General information</name>
+		<description>Allows clinician to access General information section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Stomatology</name>
+		<description>Allows clinician to access Stomatology section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Ophtalmology</name>
+		<description>Allows clinician to access Ophtalmology section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Emergency</name>
+		<description>Allows clinician to access Emergency section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Physiotherapy</name>
+		<description>Allows clinician to access Physiotherapy section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Mental Health</name>
+		<description>Allows clinician to access Mental Health section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Medical Acts</name>
+		<description>Allows clinician to access Medical Acts section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Diagnosis</name>
+		<description>Allows clinician to access Diagnosis section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Forensic</name>
+		<description>Allows clinician to access Forensic section</description>
+	</privilege>
+	
+	<privilege>
+		<name>Manage OPD Form - Transfer Out</name>
+		<description>Allows clinician to access Transfer Out section</description>
+	</privilege>
+
+	<privilege>
+		<name>Patient Dashboard - View Patient History</name>
+		<description>Patient Dashboard - View Patient Summary</description>
+	</privilege>
+
+	<privilege>
+		<name>Medical View Laboratory Value</name>
+		<description>Medical View Laboratory Value</description>
+	</privilege>
+
+	<privilege>
+		<name>Medical View Laboratory ValueHeader</name>
+		<description>Medical View Laboratory ValueHeader</description>
+	</privilege>
+
+	<!-- /Required Privileges -->
+
+
+	<!-- Required Global Properties 
+	<globalProperty>
+		<property>mohdataflowmodule.someProperty</property>
+		<defaultValue></defaultValue>
+		<description>
+			A description of the global property goes here.  The description
+			should explain enough for administrators to understand the purpose
+			and possible values for the global property.
+		</description>
+	</globalProperty>
+	/Required Global Properties -->
+	
+	<!--
+	<dwr>
+		<allow>
+			<create creator="new" javascript="DWRFormEntryService">
+				<param name="class" value="org.openmrs.module.mohdataflowmodule.web.DWRFormEntryService"/>
+				<include method="enterForm"/>
+			</create>
+		</allow>
+
+		<signatures>
+			<![CDATA[
+			import org.openmrs.module.mohdataflowmodule.web.DWRFormEntryService;
+			DWRFormEntryService.enterForm(Integer patientId, Integer formId, boolean useEncounter, List<String> fields);
+			]]>
+		</signatures>	
+	</dwr>
+	-->
+	
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
+	<servlet>
+		<servlet-name>formDownload</servlet-name>
+		<servlet-class>org.openmrs.module.mohdataflowmodule.web.FormDownloadServlet</servlet-class>
+	</servlet>
+	-->
+	<!-- /Servlets -->
+	
+	
+	<!-- Internationalization -->
+	<!-- All message codes should start with mohdataflowmodule.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+</module>

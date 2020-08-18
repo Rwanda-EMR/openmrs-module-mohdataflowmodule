@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.Concept;
 import org.openmrs.ConceptAnswer;
 import org.openmrs.Encounter;
+import org.openmrs.EncounterProvider;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.Obs;
@@ -318,6 +319,17 @@ public class MohDataFlowUtil {
 		Provider provider = null;
 		if(providers.size() > 0) {
 			provider = providers.iterator().next();
+		}else {
+			provider = Context.getProviderService().getUnknownProvider();
+		}
+		return provider;
+	}
+	
+	public  static Provider getProviderFromEncounter(Encounter encounter){
+		Collection<EncounterProvider> providers = encounter.getEncounterProviders();
+		Provider provider = null;
+		if(providers.size() > 0) {
+			provider = providers.iterator().next().getProvider();
 		}else {
 			provider = Context.getProviderService().getUnknownProvider();
 		}

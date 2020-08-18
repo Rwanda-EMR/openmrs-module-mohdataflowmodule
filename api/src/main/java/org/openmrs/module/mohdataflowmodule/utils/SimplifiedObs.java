@@ -23,7 +23,7 @@ public class SimplifiedObs {
     public SimplifiedObs(Obs o) {
         this.obsDatetime = o.getObsDatetime();
         this.value = o.getValueAsString(Context.getLocale());
-        this.setProvider(o.getEncounter().getProvider());
+        this.setProvider(MohDataFlowUtil.getProviderFromEncounter(o.getEncounter()).getPerson());
         this.labTest = o.getConcept().getName().getName();
     }
 

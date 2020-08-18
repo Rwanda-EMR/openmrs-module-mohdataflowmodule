@@ -223,8 +223,7 @@ public class MohDataFlowUtil {
         List<EncounterType> encounterTypes = Context.getEncounterService()
                 .getAllEncounterTypes();
         List<Encounter> encounters = Context.getEncounterService()
-                .getEncounters(who, loc, fromDate, toDate, null,
-                        encounterTypes, null, false);
+        		.getEncounters(who, loc, fromDate, toDate, null, encounterTypes, null, null, null, false);
         return encounters;
     }
 

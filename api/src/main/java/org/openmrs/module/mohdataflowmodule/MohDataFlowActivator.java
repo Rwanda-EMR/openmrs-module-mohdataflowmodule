@@ -15,13 +15,13 @@ package org.openmrs.module.mohdataflowmodule;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.Activator;
+import org.openmrs.module.BaseModuleActivator;
 
 /**
  * This class contains the logic that is run every time this module is either
  * started or shutdown
  */
-public class MohDataFlowActivator implements Activator {
+public class MohDataFlowActivator extends BaseModuleActivator {
 
     private Log log = LogFactory.getLog(this.getClass());
 

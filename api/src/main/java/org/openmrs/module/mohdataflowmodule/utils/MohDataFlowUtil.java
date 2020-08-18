@@ -3,21 +3,23 @@
  */
 package org.openmrs.module.mohdataflowmodule.utils;
 
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Concept;
 import org.openmrs.ConceptAnswer;
-import org.openmrs.DrugOrder;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
-import org.openmrs.User;
+import org.openmrs.Provider;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.pharmacymanagement.DrugOrderPrescription;
 import org.openmrs.module.pharmacymanagement.service.DrugOrderService;
@@ -310,13 +312,24 @@ public class MohDataFlowUtil {
         }
         return o;
     }
+    
+	public  static Provider getProviderFromPerson(Person person){
+		Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(person);
+		Provider provider = null;
+		if(providers.size() > 0) {
+			provider = providers.iterator().next();
+		}else {
+			provider = Context.getProviderService().getUnknownProvider();
+		}
+		return provider;
+	}
 
     /**
      * Auto generated method comment
      *
      * @param encounterDate
      *            Date of the encounter
-     * @param provider
+     * @param person
      *            Person
      * @param location
      *            Location
@@ -329,14 +342,14 @@ public class MohDataFlowUtil {
      * @return
      */
     public static Encounter createEncounter(Date encounterDate,
-                                            Person provider, Location location, Patient patient,
+                                            Person person, Location location, Patient patient,
                                             EncounterType encounterType, List<Obs> obsList) {
         Encounter enc = new Encounter();
 
         try {
             enc.setDateCreated(new Date());
             enc.setEncounterDatetime(encounterDate);
-            enc.setProvider(provider);
+            enc.setProvider(null, getProviderFromPerson(person));
             enc.setLocation(location);
             enc.setPatient(patient);
             enc.setEncounterType(encounterType);

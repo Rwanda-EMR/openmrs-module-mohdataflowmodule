@@ -26,17 +26,17 @@ public class MohDataFlowActivator extends BaseModuleActivator {
     private Log log = LogFactory.getLog(this.getClass());
 
     /**
-     * @see org.openmrs.module.Activator#startup()
+     * @see ModuleActivator#willStart()
      */
-    public void startup() {
-        log.info("Starting MoH-HMISDataFlow Module");
+    public void willStart() {
+    	log.info("Starting MoH-HMISDataFlow Module");
     }
 
-    /**
-     * @see org.openmrs.module.Activator#shutdown()
-     */
-    public void shutdown() {
-        log.info("Shutting down MoH-HMISDataFlow Module");
-    }
+	/**
+	 * @see ModuleActivator#willStop()
+	 */
+	public void willStop() {
+		log.info("Shutting down MoH-HMISDataFlow Module");
+	}
 
 }

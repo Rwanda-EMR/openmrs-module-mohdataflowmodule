@@ -45,13 +45,12 @@
 		<artifactId>itextpdf</artifactId>
 		<version>5.0.6</version>
 	</dependency>
-
-	   <dependency>
-		   <groupId>org.openmrs.module</groupId>
-		   <artifactId>pharmacymanagement-api</artifactId>
-		   <version>1.3.5-SNAPSHOT</version>
-		   <scope>provided</scope>
-	   </dependency>
+	<dependency>
+		<groupId>org.openmrs.module</groupId>
+		<artifactId>pharmacymanagement-api</artifactId>
+		<version>${pharmacymanagementVersion}</version>
+		<scope>provided</scope>
+	</dependency>
 
    </dependencies>
 

@@ -6,16 +6,29 @@
 	<artifactId>mohdataflowmodule</artifactId>
 	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>mohdataflowmodule</name>
+	<name>MoH Data Flow</name>
 	<description>mohdataflowmodule</description>
 
 	<url>http://openmrs.org</url>
 
 	<scm>
-		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/pharmacymanagement/trunk/</connection>
-		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/pharmacymanagement/trunk/</developerConnection>
-		<url>http://svn.openmrs.org/openmrs-modules/pharmacymanagement/trunk/</url>
+		<developerConnection>scm:git:https://github.com/Rwanda-EMR/openmrs-module-mohdataflowmodule</developerConnection>
+		<url>https://github.com/Rwanda-EMR/openmrs-module-mohdataflowmodule</url>
+		<tag>HEAD</tag>
 	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>openmrs-repo-modules-rwandaemr</id>
+			<name>rwandaemr-artifactory-primary-0-releases</name>
+			<url>https://rwandaemr.jfrog.io/artifactory/libs-release</url>
+		</repository>
+		<snapshotRepository>
+			<id>openmrs-repo-modules-rwandaemr-snapshots</id>
+			<name>rwandaemr-artifactory-primary-0-snapshots</name>
+			<url>https://rwandaemr.jfrog.io/artifactory/libs-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<modules>
 		<module>api</module>

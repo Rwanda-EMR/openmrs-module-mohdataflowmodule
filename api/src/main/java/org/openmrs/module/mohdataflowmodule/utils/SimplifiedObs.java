@@ -5,6 +5,7 @@ package org.openmrs.module.mohdataflowmodule.utils;
 
 import java.util.Date;
 
+import org.openmrs.Concept;
 import org.openmrs.Obs;
 import org.openmrs.Person;
 import org.openmrs.api.context.Context;
@@ -19,12 +20,23 @@ public class SimplifiedObs {
     private String value;
     private Person provider;
     private String labTest;
+    private Concept concept;
+
 
     public SimplifiedObs(Obs o) {
         this.obsDatetime = o.getObsDatetime();
         this.value = o.getValueAsString(Context.getLocale());
         this.setProvider(MohDataFlowUtil.getProviderFromEncounter(o.getEncounter()).getPerson());
         this.labTest = o.getConcept().getName().getName();
+        this.concept = o.getConcept();
+    }
+
+    public Concept getConcept() {
+        return concept;
+    }
+
+    public void setConcept(Concept concept) {
+        this.concept = concept;
     }
 
     public Date getObsDatetime() {

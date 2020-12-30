@@ -43,6 +43,9 @@
 				<prop key="module/mohdataflowmodule/neonatology.form">neonatologyFormController</prop>
 				<prop key="module/mohdataflowmodule/pediatrics.form">pediatricsFormController</prop>
 				<prop key="module/mohdataflowmodule/surgery.form">surgeryFormController</prop>
+				<prop key="module/mohdataflowmodule/history.form">medicalHistoryController</prop>
+				<prop key="module/mohdataflowmodule/searchpatient.form">patientSearchController</prop>
+				<prop key="module/mohdataflowmodule/medicalhistoryconfig.form">medicalHistoryConfigurationController</prop>
 			</props>
 		</property>
 	</bean>
@@ -167,6 +170,20 @@
 			<value>/module/mohdataflowmodule/ipdForm</value>
 		</property>
 	</bean>
-
+	<bean id="medicalHistoryController" class="org.openmrs.module.mohdataflowmodule.web.controller.MedicalHistoryController">
+		<property name="viewName">
+			<value >/module/mohdataflowmodule/medicalHistoryForm</value>
+		</property>
+	</bean>
+	<bean id="patientSearchController" class="org.openmrs.module.mohdataflowmodule.web.controller.PatientSearchController">
+	<property name="viewName">
+			<value>/module/mohdataflowmodule/patientSearchForm</value>
+		</property>
+	</bean>
+	<bean id="medicalHistoryConfigurationController" class="org.openmrs.module.mohdataflowmodule.web.controller.MedicalHistoryConfigurationController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/medicalHistoryConfiguration</value>
+		</property>
+	</bean>
 	<!-- /Controllers -->
 </beans>

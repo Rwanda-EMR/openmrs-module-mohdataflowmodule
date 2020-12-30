@@ -6,7 +6,7 @@
 	<!-- Base Module Properties -->
 	<id>mohdataflowmodule</id>
 	<name>MoH Data Flow Module</name>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<package>org.openmrs.module.mohdataflowmodule</package>
 	<author>MoH-Rwanda</author>
 	<description>
@@ -28,12 +28,16 @@
 		<point>org.openmrs.patientDashboardTab</point>
 		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowDashboardTab</class>
 	</extension>
-	<!-- Extensions 
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>org.openmrs.module.mohdataflowmodule.extension.html.AdminList</class>
 	</extension>
-	
+	<extension>
+		<point>org.openmrs.gutter.tools</point>
+		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowGutterLink</class>
+	</extension>
+	<!-- Extensions
+
 	<extension>
 		<point>org.openmrs.patientDashboardTab</point>
 		<class>org.openmrs.module.mohdataflowmodule.extension.html.MohDataFlowDashboardTab</class>
@@ -168,6 +172,69 @@
 		<name>Medical View Laboratory ValueHeader</name>
 		<description>Medical View Laboratory ValueHeader</description>
 	</privilege>
+	<privilege>
+		<name>Search Patient History</name>
+		<description>View Search Patient History</description>
+	</privilege>
+	<privilege>
+		<name>Medical History Configuration</name>
+		<description>View Medical History Configuration</description>
+	</privilege>
+	<globalProperty>
+		<property>mohdataflowmodule.OrderedMedicalActs</property>
+		<defaultValue>9909,9975,10142,12142,12134,12135,12136,12137,12138</defaultValue>
+		<description>Medical Acts Concepts</description>
+	</globalProperty>
+	mohdataflowmodule.enteredVisitsForms
+	<globalProperty>
+		<property>mohdataflowmodule.dignosisConcept</property>
+		<defaultValue>105502,2134,992</defaultValue>
+		<description>Diagnoses Concepts</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.enteredVisitsForms</property>
+		<defaultValue>127,485</defaultValue>
+		<description>Entered Visits Form for IPD</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.drugAdministration</property>
+		<defaultValue>3097</defaultValue>
+		<description>List of Drug entered Drug Administration Form for IPD</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.transformDiagnosisList</property>
+		<defaultValue>2</defaultValue>
+		<description>Transform Diagnoses List</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.transformDrugsList</property>
+		<defaultValue>8</defaultValue>
+		<description>Transform Drugs List</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.transformLabExamsList</property>
+		<defaultValue>50</defaultValue>
+		<description>Transform Laboratory Exams list</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.transformActsList</property>
+		<defaultValue>4</defaultValue>
+		<description>Transform Laboratory Exams list</description>
+	</globalProperty>
+
+	<globalProperty>
+		<property>mohdataflowmodule.transformVisitsList</property>
+		<defaultValue>4</defaultValue>
+		<description>Transform visists list</description>
+	</globalProperty>
+
+
 
 	<!-- /Required Privileges -->
 

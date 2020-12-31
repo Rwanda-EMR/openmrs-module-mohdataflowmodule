@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <!-- Beans to add to the current Application context definition -->
 
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 	<bean id="mohdataflowmoduleUrlMapping"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="order">
 			<value>2</value>
 		</property>
@@ -16,10 +24,10 @@
 				<prop key="module/mohdataflowmodule/mohdataflowdischarge.form">mohDataFlowDischargeController</prop>
 				<prop key="module/mohdataflowmodule/inpatient.form">ipdController</prop>
 				<prop key="module/mohdataflowmodule/outpatient.form">opdController</prop>
-								
+
 				<prop key="module/mohdataflowmodule/diagnosis.form">diagnosisFormController</prop>
 				<prop key="module/mohdataflowmodule/medicalacts.form">medicalActsFormController</prop>
-				
+
 				<prop key="module/mohdataflowmodule/emergency.form">emergencyFormController</prop>
 				<prop key="module/mohdataflowmodule/mentalhealth.form">mentalHealthFormController</prop>
 				<prop key="module/mohdataflowmodule/opdgeneralinfo.form">opdGeneralInfoFormController</prop>
@@ -28,13 +36,16 @@
 				<prop key="module/mohdataflowmodule/stomatology.form">stomatologyFormController</prop>
 				<prop key="module/mohdataflowmodule/transferout.form">transferOutFormController</prop>
 				<prop key="module/mohdataflowmodule/forensic.form">forensicFormController</prop>
-				
+
 				<prop key="module/mohdataflowmodule/internalmedecine.form">internalMedecineFormController</prop>
 				<prop key="module/mohdataflowmodule/ipdgeneralinfo.form">ipdGeneralInfoFormController</prop>
 				<prop key="module/mohdataflowmodule/maternity.form">maternityFormController</prop>
 				<prop key="module/mohdataflowmodule/neonatology.form">neonatologyFormController</prop>
 				<prop key="module/mohdataflowmodule/pediatrics.form">pediatricsFormController</prop>
 				<prop key="module/mohdataflowmodule/surgery.form">surgeryFormController</prop>
+				<prop key="module/mohdataflowmodule/history.form">medicalHistoryController</prop>
+				<prop key="module/mohdataflowmodule/searchpatient.form">patientSearchController</prop>
+				<prop key="module/mohdataflowmodule/medicalhistoryconfig.form">medicalHistoryConfigurationController</prop>
 			</props>
 		</property>
 	</bean>
@@ -60,8 +71,8 @@
 			<value>/module/mohdataflowmodule/opdForm</value>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="diagnosisFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.DiagnosisFormController">
 		<property name="viewName">
 			<value>/module/mohdataflowmodule/templates/diagnosisForm</value>
@@ -73,7 +84,7 @@
 			<value>/module/mohdataflowmodule/templates/medicalActsForm</value>
 		</property>
 	</bean>
-	
+
 
 	<bean id="emergencyFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.EmergencyFormController">
 		<property name="viewName">
@@ -110,7 +121,7 @@
 			<value>/module/mohdataflowmodule/opdForm</value>
 		</property>
 	</bean>
-	
+
 	<bean id="transferOutFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.opd.TransferOutFormController">
 		<property name="viewName">
 			<value>/module/mohdataflowmodule/opdForm</value>
@@ -123,7 +134,7 @@
 		</property>
 	</bean>
 
-	
+
 	<bean id="internalMedecineFormController" class="org.openmrs.module.mohdataflowmodule.web.controller.ipd.InternalMedecineFormController">
 		<property name="viewName">
 			<value>/module/mohdataflowmodule/ipdForm</value>
@@ -159,6 +170,20 @@
 			<value>/module/mohdataflowmodule/ipdForm</value>
 		</property>
 	</bean>
-
+	<bean id="medicalHistoryController" class="org.openmrs.module.mohdataflowmodule.web.controller.MedicalHistoryController">
+		<property name="viewName">
+			<value >/module/mohdataflowmodule/medicalHistoryForm</value>
+		</property>
+	</bean>
+	<bean id="patientSearchController" class="org.openmrs.module.mohdataflowmodule.web.controller.PatientSearchController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/medicalHistorySearchForm</value>
+		</property>
+	</bean>
+	<bean id="medicalHistoryConfigurationController" class="org.openmrs.module.mohdataflowmodule.web.controller.MedicalHistoryConfigurationController">
+		<property name="viewName">
+			<value>/module/mohdataflowmodule/medicalHistoryConfiguration</value>
+		</property>
+	</bean>
 	<!-- /Controllers -->
 </beans>

@@ -34,5 +34,4 @@ public class MohDataFlowDashboardTab extends PatientDashboardTabExt {
 
         return "mohdataflowmodule.dashboard";
     }
-
 }

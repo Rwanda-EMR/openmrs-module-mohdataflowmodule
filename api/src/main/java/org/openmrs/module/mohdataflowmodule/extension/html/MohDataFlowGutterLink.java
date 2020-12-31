@@ -18,7 +18,7 @@ public class MohDataFlowGutterLink extends LinkExt {
      */
     @Override
     public String getLabel() {
-        return "mohdataflowmodule.discharge";
+        return "mohdataflowmodule.MedicalHistory";
     }
 
     /**
@@ -28,7 +28,7 @@ public class MohDataFlowGutterLink extends LinkExt {
      */
     @Override
     public String getRequiredPrivilege() {
-        return "Manage Discharge patient";
+        return "Search Patient History";
     }
 
     /**
@@ -38,7 +38,7 @@ public class MohDataFlowGutterLink extends LinkExt {
      */
     @Override
     public String getUrl() {
-        return "module/mohdataflowmodule/mohdataflowdischarge.form";
+        return "module/mohdataflowmodule/history.form";
     }
 
 }

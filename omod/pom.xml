@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.openmrs.module</groupId>
 		<artifactId>mohdataflowmodule</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>mohdataflowmodule-omod</artifactId>
 	<packaging>jar</packaging>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>pharmacymanagement-api</artifactId>
-			<version>1.3.5-SNAPSHOT</version>
+			<version>1.4.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 

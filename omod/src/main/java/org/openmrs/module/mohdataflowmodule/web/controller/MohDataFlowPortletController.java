@@ -62,6 +62,29 @@ public class MohDataFlowPortletController extends PortletController {
                     + "trying to load patient's "
                     + "DIAGNOSIS history on the dashboard");
         }
+        try {
+            model.put("actsList",MohDataFlowUtil.getPastMedicalActsList(patient,null,null));
+        } catch (Exception e) {
+            log.error(">>>>>>>>>>> MOH-DATA FLOW >> An error occured when "
+                    + "trying to load patient's "
+                    + "DIAGNOSIS history on the dashboard");
+        }
+        try {
+            model.put("encountersLists",MohDataFlowUtil.getPatientVisitsEncounters(patient,null,null,null));
+        }
+        catch (Exception e) {
+            log.error(">>>>>>>>>>> MOH-DATA FLOW >> An error occured when "
+                    + "trying to load patient's "
+                    + "DIAGNOSIS history on the dashboard");
+        }
+        try{
+            model.put("administeredDrugLists",MohDataFlowUtil.getPastAdminstredDrugList(patient,null,null));
+        }
+        catch (Exception e) {
+            log.error(">>>>>>>>>>> MOH-DATA FLOW >> An error occured when "
+                    + "trying to load patient's "
+                    + "DIAGNOSIS history on the dashboard");
+        }
 
         super.populateModel(request, model);
     }

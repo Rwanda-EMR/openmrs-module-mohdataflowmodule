@@ -8,16 +8,7 @@ import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.Concept;
-import org.openmrs.ConceptAnswer;
-import org.openmrs.DrugOrder;
-import org.openmrs.Encounter;
-import org.openmrs.EncounterType;
-import org.openmrs.Location;
-import org.openmrs.Obs;
-import org.openmrs.Patient;
-import org.openmrs.Person;
-import org.openmrs.User;
+import org.openmrs.*;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.pharmacymanagement.DrugOrderPrescription;
 import org.openmrs.module.pharmacymanagement.service.DrugOrderService;
@@ -30,6 +21,8 @@ public class MohDataFlowUtil {
 
     /** Logger for this class and subclasses */
     private static Log log = LogFactory.getLog(MohDataFlowUtil.class);
+    private static final int orderTypeId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("laboratorymanagement.orderType.labOrderTypeId"));
+
 
     /**
      * Loads drugs history
@@ -96,17 +89,22 @@ public class MohDataFlowUtil {
                                                            Date before, Object[] conditions) {
 
         List<SimplifiedObs> diagnoses = new ArrayList<SimplifiedObs>();
+        List<Integer> diagnosisConcepts = new ArrayList<Integer>();
+
+        String arrayConcpts[]   = Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.dignosisConcept").split(",");
+
+        for(String sc : arrayConcpts){
+            diagnosisConcepts.add(Integer.parseInt(sc));
+        }
 
         List<Concept> concList = new ArrayList<Concept>();
-        // outpatient diagnosis
-        concList.add(Context.getConceptService().getConcept(105502));
-        // hospitalized diagnosis
-        concList.add(Context.getConceptService().getConcept(2134));
-        // previous diagnosis
-        concList.add(Context.getConceptService().getConcept(992));
+
+        for (Integer ids : diagnosisConcepts){
+            concList.add(Context.getConceptService().getConcept(ids));
+        }
 
         for (Concept c : concList) {
-            diagnoses.addAll(transformObsValueList(Context.getObsService()
+            diagnoses.addAll(transformDiagnosisObsValueList(Context.getObsService()
                     .getObservationsByPersonAndConcept(patient, c)));
         }
         return diagnoses;
@@ -143,11 +141,53 @@ public class MohDataFlowUtil {
         // =======
         for (Obs o : obsList) {
             if (o.getOrder() != null) {
-                if (o.getOrder().getOrderType().getOrderTypeId().intValue() == 1)// Context.getAdministrationService().getGlobalProperty("orderTypeId")
-                    tests.add(o);
+                if (o.getOrder().getOrderType().getOrderTypeId().intValue() == orderTypeId);
+                tests.add(o);
             }
         }
         return transformObsValueListLabTest(tests);
+    }
+
+    public static List<SimplifiedObs> getPastMedicalActsList(Patient patient,
+                                                             Date before, Object[] conditions) {
+        List<SimplifiedObs> acts = new ArrayList<SimplifiedObs>();
+        List<SimplifiedObs> obsActs = new ArrayList<SimplifiedObs>();
+        List<Integer> orderedActs = new ArrayList<Integer>();
+        String stringActsConcept[] = Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.OrderedMedicalActs").split(",");
+        for(String stCons : stringActsConcept){
+            orderedActs.add(Integer.parseInt(stCons));
+        }
+        List<Concept> concList = new ArrayList<Concept>();
+        for (Integer concIds : orderedActs){
+            concList.add(Context.getConceptService().getConcept(concIds));
+        }
+        for (Concept c : concList) {
+            acts.addAll(transformActsObsValueList(Context.getObsService()
+                    .getObservationsByPersonAndConcept(patient, c)));
+        }
+        Collections.reverse(acts);
+        return acts;
+    }
+
+    public static List<SimplifiedObs> getPastAdminstredDrugList(Patient patient,
+                                                                Date before, Object[] conditions) {
+        List<SimplifiedObs> drugAdmin = new ArrayList<SimplifiedObs>();
+        List<Integer> orderedDrug = new ArrayList<Integer>();
+        String stringDrugConcept[] = Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.drugAdministration").split(",");
+        for(String stCons : stringDrugConcept){
+            orderedDrug.add(Integer.parseInt(stCons));
+        }
+        List<Concept> concList = new ArrayList<Concept>();
+        for (Integer concIds : orderedDrug){
+            concList.add(Context.getConceptService().getConcept(concIds));
+        }
+        for (Concept c : concList) {
+            drugAdmin.addAll(transformDrugObsValueList(Context.getObsService()
+                    .getObservationsByPersonAndConcept(patient, c)));
+        }
+
+        Collections.reverse(drugAdmin);
+        return drugAdmin;
     }
 
     /**
@@ -157,28 +197,76 @@ public class MohDataFlowUtil {
      *            the list of Obs to be cast into simplified Obs
      * @return simplifiedObsList the simplified list of obs
      */
-    private static List<SimplifiedObs> transformObsValueList(List<Obs> obsList) {
+    private static List<SimplifiedObs> transformDiagnosisObsValueList(List<Obs> obsList) {
+
+        Integer diagnosisTransformValue = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.transformDiagnosisList"));
         List<SimplifiedObs> simplifiedObsList = new ArrayList<SimplifiedObs>();
         int count = 0;
 
         for (Obs o : obsList) {
             simplifiedObsList.add(new SimplifiedObs(o));
-            if (count == 4)
+            if (count == diagnosisTransformValue)
                 break;
             else
                 count += 1;
         }
-
         return simplifiedObsList;
     }
+    private static List<SimplifiedObs> transformActsObsValueList(List<Obs> obsList) {
 
-    private static List<SimplifiedObs> transformObsValueListLabTest(List<Obs> obsList) {
+        Integer actsTransformValue = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.transformActsList"));
         List<SimplifiedObs> simplifiedObsList = new ArrayList<SimplifiedObs>();
         int count = 0;
 
         for (Obs o : obsList) {
             simplifiedObsList.add(new SimplifiedObs(o));
-            if (count == 100)
+            if (count == actsTransformValue)
+                break;
+            else
+                count += 1;
+        }
+        return simplifiedObsList;
+    }
+    private static List<SimplifiedObs> transformVisitsEncounterValueList(List<Obs> obsList) {
+
+        Integer visitsTransformValue = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.transformVisitsList"));
+        List<SimplifiedObs> simplifiedObsList = new ArrayList<SimplifiedObs>();
+        int count = 0;
+
+        for (Obs o : obsList) {
+            simplifiedObsList.add(new SimplifiedObs(o));
+            if (count == visitsTransformValue)
+                break;
+            else
+                count += 1;
+        }
+        return simplifiedObsList;
+    }
+    private static List<SimplifiedObs> transformDrugObsValueList(List<Obs> obsList) {
+
+        Integer drugTransformValue = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.transformDrugsList"));
+
+        List<SimplifiedObs> simplifiedObsList = new ArrayList<SimplifiedObs>();
+        int count = 0;
+
+        for (Obs o : obsList) {
+            simplifiedObsList.add(new SimplifiedObs(o));
+            if (count == drugTransformValue)
+                break;
+            else
+                count += 1;
+        }
+        return simplifiedObsList;
+    }
+
+    private static List<SimplifiedObs> transformObsValueListLabTest(List<Obs> obsList) {
+        Integer labExamsTransformValue = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.transformLabExamsList"));
+        List<SimplifiedObs> simplifiedObsList = new ArrayList<SimplifiedObs>();
+        int count = 0;
+
+        for (Obs o : obsList) {
+            simplifiedObsList.add(new SimplifiedObs(o));
+            if (count == labExamsTransformValue)
                 break;
             else
                 count += 1;
@@ -222,9 +310,41 @@ public class MohDataFlowUtil {
 
         List<EncounterType> encounterTypes = Context.getEncounterService()
                 .getAllEncounterTypes();
-        List<Encounter> encounters = Context.getEncounterService()
-                .getEncounters(who, loc, fromDate, toDate, null,
-                        encounterTypes, null, false);
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(who, loc, fromDate, toDate, null, encounterTypes, null, null, null, false);
+        return encounters;
+    }
+    public static List<Encounter> getPatientVisitsEncounters(Patient who,
+                                                             Location loc, Date fromDate, Date toDate) {
+
+        List<Integer> formIds = new ArrayList<Integer>();
+
+        String stringActsConcept[] = Context.getAdministrationService().getGlobalProperty("mohdataflowmodule.enteredVisitsForms").split(",");
+        for(String stCons : stringActsConcept){
+            formIds.add(Integer.parseInt(stCons));
+        }
+        List<EncounterType> encounterTypes = Context.getEncounterService().getAllEncounterTypes();
+        List<Form> listForms = new ArrayList<Form>();
+
+        for (Integer id : formIds){
+            listForms.add(Context.getFormService().getForm(id));
+        }
+        /*EncounterSearchCriteria encounterSearchCriteria= new EncounterSearchCriteria(who,null,null,null,null,listForms,encounterTypes,null,null,null,false);
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(encounterSearchCriteria);*/
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(who,null,null,null,listForms,encounterTypes,null,null,null,false);
+        Collections.reverse(encounters);
+        return transformEncounterValueList(encounters);
+    }
+
+    private static List<Encounter> transformEncounterValueList(List<Encounter> encountersList) {
+        List<Encounter> encounters = new ArrayList<Encounter>();
+        int count = 0;
+        for (Encounter ec : encountersList) {
+            encounters.add(ec);
+            if (count == 8)
+                break;
+            else
+                count += 1;
+        }
         return encounters;
     }
 
